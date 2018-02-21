@@ -1,0 +1,43 @@
+<div class="container" ng-controller="reportController"	ng-init="generateReport()">
+	<br/><br/><br/><br/><br/>
+	<ol class="breadcrumb">
+		<li class="active"><a href="#categoryList">All Categories</a></li>
+		<li><a href="#projectList">All Projects</a></li>
+		<li ng-show="userData.role =='user'"><a href="#addProject">Create a project</a></li>
+		<li ng-show="userData.role =='user'"><a href="#donations">View my donations</a></li>
+		<li ng-show="userData.role =='user'"><a href="#myProjects">My Projects</a></li>
+		<li ng-show="userData.role =='admin'"><a href="#reports">View Reports</a></li>
+	</ol>
+	<h2><center>Report</center></h2>
+	<h2>Donation wise list of countries</h2>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Country</th>
+				<th>Donation Amount</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="report in countryReport | orderBy : '-count'">
+				<td>{{report.country}}</td>
+				<td>{{report.count | currency}}</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<h2>Most popular projects</h2>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Project</th>
+				<th>Donations</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="project in projects | orderBy : '-donationCount'">
+				<td>{{project.projectName}}</td>
+				<td>{{project.donationCount}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

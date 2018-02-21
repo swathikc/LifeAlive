@@ -1,0 +1,36 @@
+<div class="container" ng-controller="donationsController" ng-init="getDonations()">
+<br/><br/><br/><br/>
+<ol class="breadcrumb">
+		<li class="active"><a href="#categoryList">All Categories</a></li>
+		<li><a href="#projectList">All Projects</a></li>
+		<li ng-show="userData.role =='user'"><a href="#addProject">Create a project</a></li>
+		<li ng-show="userData.role =='user'"><a href="#donations">View my donations</a></li>
+		<li ng-show="userData.role =='user'"><a href="#myProjects">My Projects</a></li>
+		<li ng-show="userData.role =='admin'"><a href="#reports">View Reports</a></li>
+</ol>
+<h2><center>My Donations</center></h2><br/><br/>
+<table class="table">
+    <thead>
+      <tr>
+        <th>Project Name</th>
+		<th>Type</th>
+		<th>Donated On</th>
+        <th>Amount</th>
+        <th>Perform Action</th>
+      </tr>
+    </thead>
+    <tbody ng-repeat="donation in donations">
+	      <tr>
+	        <td>{{donation.projectsModel.projectName}}</td>
+	        <td>{{donation.projectsModel.categoriesModel.categoryName}}</td>
+			<td>{{donation.dateOfPayment | date  }}</td>
+			<td>{{donation.amount | currency}}</td>
+	        <td>
+				<a href="#project/{{donation.projectId}}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+			</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 style="color: red;">{{error}}</h3>
+  <h3 style="color: red;">{{errorMessage}}</h3>
+</div>

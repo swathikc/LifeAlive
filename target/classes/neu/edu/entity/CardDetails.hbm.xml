@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 23 Apr, 2017 2:44:42 AM by Hibernate Tools 5.2.1.Final -->
+<hibernate-mapping>
+    <class name="neu.edu.entity.CardDetails" table="card_details" catalog="life_alive_db" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="userAccount" class="neu.edu.entity.UserAccount" fetch="select">
+            <column name="userId" />
+        </many-to-one>
+        <property name="cardType" type="string">
+            <column name="cardType" length="45" />
+        </property>
+        <property name="cardNo" type="string">
+            <column name="cardNo" length="45" />
+        </property>
+        <property name="nameOnCard" type="string">
+            <column name="nameOnCard" length="45" />
+        </property>
+        <property name="cvc" type="string">
+            <column name="cvc" length="45" />
+        </property>
+        <property name="expiryDate" type="string">
+            <column name="expiryDate" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

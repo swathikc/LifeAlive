@@ -1,0 +1,65 @@
+
+<!-- Page Content -->
+<div class="container-fluid" ng-controller="welcomeController" style="padding: 0;">
+
+	<!-- Header Carousel -->
+	<div id="myCarousel" class="carousel slide" style="height: 450px;">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1"></li>
+			<li data-target="#myCarousel" data-slide-to="2"></li>
+		</ol>
+
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner">
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+					<img
+						src="http://citybeach.events/wordpress-new/wp-content/uploads/2015/07/2015_FundraisingCBleader.jpg"
+						alt="" class="fill">
+				</div>
+				<div class="item">
+					<img
+						src="images/children.jpg"
+						alt="" class="fill">
+				</div>
+				<div class="item">
+					<img
+						src="images/animal.jpg"
+						alt="" class="fill">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Marketing Icons Section -->
+	<div class="row" style="margin: 0px 100px;">
+		<div class="col-lg-12">
+			<h1>Life Alive</h1>
+			<p style="font-size: 20px;">
+				Fundraising is the gentle art of teaching the joy of giving. – Henry
+				Rosso</br>We help people raise funds for various social causes. Do you
+				want to be a part of sharing love? Then register yourself with us
+				today and take the first step in enlighting someones life!
+			</p>
+		</div>
+	</div>
+	<div class="row" style="margin: 0px 100px;">
+		<div class="col-lg-2">
+			<form method="post" action="#register">
+				<button type="submit" class="btn btn-primary">Sign up to
+					raise funds or donate</button>
+			</form>
+		</div>
+	</div>
+	<!-- /.row -->
+</div>
+<br/>
+<hr>
+
+<script>
+$('.carousel').carousel({
+    interval: 5000
+})
+</script>

@@ -1,0 +1,96 @@
+<!-- Page Content -->
+<div class="container partial-container"
+	ng-controller="categoryListController" ng-init="getCategoryList()">
+	<ol class="breadcrumb">
+		<li class="active"><a href="#categoryList">All Categories</a></li>
+		<li><a href="#projectList">All Projects</a></li>
+		<li ng-show="userData.role =='user'"><a href="#addProject">Create
+				a project</a></li>
+		<li ng-show="userData.role =='user'"><a href="#donations">View
+				my donations</a></li>
+		<li ng-show="userData.role =='user'"><a href="#myProjects">My Projects</a></li>
+		<li ng-show="userData.role =='admin'"><a href="#reports">View
+				Reports</a></li>
+	</ol>
+
+	<h1 class="text-center">Categories</h1>
+	<hr/>
+
+	<!-- Blog Post Row -->
+	<div ng-repeat="category in categoryList">
+		<div class="row">
+			<div class="col-md-6">
+				<img class="img-responsive img-hover"
+					src="http://placehold.it/600x300" alt="">
+			</div>
+			<div class="col-md-6">
+				<h3>{{category.categoryName}}</h3>
+				<p>{{category.description}}</p>
+				<a class="btn btn-primary" href="#category/{{category.id}}" ng-disabled = "category.status == 'invalid'">View Projects</a>
+				<a class="btn btn-primary" ng-show="userData.role =='admin' && category.status == 'invalid'" ng-click="enableCategory(category)"">Enable Category</a>
+				<a class="btn btn-danger" ng-show="userData.role =='admin' && category.status == 'valid'" ng-click="deleteCategory(category)">Delete<i class="fa fa-angle-right"></i></a>
+			</div>
+		</div>
+		<!-- /.row -->
+		<hr />
+	</div>
+	<div class="alert alert-success" ng-show="showSuccessAlert">
+	  <button type="button" class="close" data-ng-click="switchBool('showSuccessAlert')" >×</button>
+	  <h4>{{successTextAlert}}</h4>
+	</div>
+
+	<button type="button" data-toggle="modal" data-target="#myModal" ng-show="userData.role =='admin'" class="btn btn-primary">Add Category</button>
+			<!-- Modal -->
+			  <div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog">
+				
+				  <!-- Modal content-->
+				   <div class="modal-content">
+					<div class="modal-header">
+					  <button type="button" class="close" data-dismiss="modal">&times;</button>
+					  <h4 class="modal-title">Add Category</h4>
+					</div>
+					<div class="modal-body" id="modal_body" style="min-height: 300px;">
+					  <form validate>
+					  <div class="row">
+							<div class="form-group">
+							  <label for="addCatagory" class="control-label col-lg-3">Catagory Name</label>
+							  <div class="col-xs-10 col-mg-4 col-lg-8">
+								  <input type="text" class="form-control" ng-model="categoryName" required>
+							  </div>
+							</div>
+					  </div><br/>
+					  <div class="row">
+							<div class="form-group">
+							  <label for="addCatagory" class="control-label col-lg-3">Description</label>
+							  <div class="col-xs-10 col-mg-4 col-lg-8">
+								  <textarea rows="4" cols="50" ng-model="description" required></textarea>
+							  </div>
+							</div>
+					  </div><br/>
+					  <div class="row">
+							<div class="form-group">
+							  <label for="addCatagory" class="control-label col-lg-3">Upload picture</label>
+							  <div class="col-xs-10 col-mg-4 col-lg-8">
+								  <input type="file" ng-model="image" accept="image/*">
+							  </div>
+							</div>
+					  </div><br/>
+						<div class="form-group">
+						  <div class="col-xs-offset-2 col-xs-10 col-mg-4 col-lg-4">
+							  <button type="submit" class="btn btn-primary" ng-click="addNewCategory()">Submit</button>
+						  </div>
+						</div>
+						<p style="color: red;">{{categoryExists}}</p>
+					  </form>
+					</div>
+				  </div>
+				  
+				</div>
+			  </div>
+			  <!-- modal end -->
+
+
+
+</div>
+<!-- /.container -->

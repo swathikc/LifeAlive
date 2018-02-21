@@ -1,0 +1,60 @@
+<!-- Page Content -->
+<div class="container partial-container" ng-controller="projectListController" ng-init="getAllProjects()">
+	<ol class="breadcrumb">
+		<li class="active"><a href="#categoryList">All Categories</a></li>
+		<li><a href="#projectList">All Projects</a></li>
+		<li ng-show="userData.role =='user'"><a href="#addProject">Create a project</a></li>
+		<li ng-show="userData.role =='user'"><a href="#donations">View my donations</a></li>
+		<li ng-show="userData.role =='user'"><a href="#myProjects">My Projects</a></li>
+		<li ng-show="userData.role =='admin'"><a href="#reports">View Reports</a></li>
+	</ol>
+	<div class="row">
+		<!-- Blog Entries Column -->
+		
+		<div class="center-block" ng-repeat="project in projectList">
+		
+			<div ng-show ="project.status == 'valid'">
+				<h1>{{project.projectName}}</h1>
+				<h4>
+					<em>by {{project.creatorName}}</em>
+				</h4>
+				<p>
+					<i class="fa fa-clock-o"></i> donate by {{project.deadline}}
+					<i class="fa fa-clock-o"></i> Amount needed {{project.amountRequired | currency}}|
+					<i class="fa fa-clock-o"></i> Amount received {{project.amountRecieved | currency}}
+				</p>
+				<img class="img-responsive img-hover"
+					src="http://placehold.it/900x300" alt="">
+				<p>{{project.description}}</p>
+				<a class="btn btn-primary" href="#project/{{project.id}}" ng-disabled = "project.status == 'invalid'">Read More <i class="fa fa-angle-right"></i></a>
+				<a class="btn btn-danger" ng-show="userData.role =='admin'" ng-click="deleteProject(project)">Delete<i class="fa fa-angle-right"></i></a>
+				<a class="btn btn-success" ng-show="userData.role == 'admin' && project.status == 'pending'" ng-click="approveProject(project)">Approve<i class="fa fa-angle-right"></i></a>
+				<hr>
+			</div>
+			
+			
+			<div ng-show=" (project.status == 'invalid' || project.status == 'pending') && userData.role == 'admin' ">
+				<h1>{{project.projectName}}</h1>
+				<h4>
+					<em>by {{project.creatorName}}</em>
+				</h4>
+				<p>
+					<i class="fa fa-clock-o"></i> donate by {{project.deadline}}
+					<i class="fa fa-clock-o"></i> Amount needed {{project.amountRequired | currency}}|
+					<i class="fa fa-clock-o"></i> Amount received {{project.amountRecieved | currency}}
+				</p>
+				<img class="img-responsive img-hover"
+					src="http://placehold.it/900x300" alt="">
+				<p>{{project.description}}</p>
+				<a class="btn btn-primary" href="#project/{{project.id}}" ng-disabled = "project.status == 'invalid'">Read More <i class="fa fa-angle-right"></i></a>
+				<a class="btn btn-danger" ng-click="deleteProject(project)">Delete<i class="fa fa-angle-right"></i></a>
+				<a class="btn btn-success" ng-show="project.status == 'pending'" ng-click="approveProject(project)">Approve<i class="fa fa-angle-right"></i></a>
+				<hr>
+			</div>
+		</div>
+
+	</div>
+	<!-- /.row -->
+
+</div>
+<!-- /.container -->

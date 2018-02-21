@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 23 Apr, 2017 2:44:42 AM by Hibernate Tools 5.2.1.Final -->
+<hibernate-mapping>
+    <class name="neu.edu.entity.Cart" table="cart" catalog="life_alive_db" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="projects" class="neu.edu.entity.Projects" fetch="select">
+            <column name="projectId" />
+        </many-to-one>
+        <many-to-one name="userAccount" class="neu.edu.entity.UserAccount" fetch="select">
+            <column name="userId" />
+        </many-to-one>
+        <property name="status" type="string">
+            <column name="status" length="45" />
+        </property>
+        <property name="amount" type="java.lang.Integer">
+            <column name="amount" />
+        </property>
+        <property name="comment" type="string">
+            <column name="comment" length="500" />
+        </property>
+    </class>
+</hibernate-mapping>

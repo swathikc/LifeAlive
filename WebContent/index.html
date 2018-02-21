@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Life Alive</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+
+<!-- JQuery -->
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+
+<!-- Custom CSS -->
+<link href="css/style.css" rel="stylesheet">
+
+<!-- Login CSS -->
+<link href="css/login.css" rel="stylesheet">
+
+<!-- ANGULAR JS -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+	<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-cookies.js"></script>
+
+<!-- APP JS -->
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/app_router.js"></script>
+<script type="text/javascript" src="js/module-welcome.js"></script>
+<script type="text/javascript" src="js/module-login.js"></script>
+<script type="text/javascript" src="js/module-categoryList.js"></script>
+<script type="text/javascript" src="js/module-register.js"></script>
+<script type="text/javascript" src="js/module-projectList.js"></script>
+<script type="text/javascript" src="js/module-category.js"></script>
+<script type="text/javascript" src="js/module-project.js"></script>
+<script type="text/javascript" src="js/module-addProject.js"></script>
+<script type="text/javascript" src="js/module-cardDetails.js"></script>
+<script type="text/javascript" src="js/module-donations.js"></script>
+<script type="text/javascript" src="js/module-report.js"></script>
+<script type="text/javascript" src="js/module-donateTime.js"></script>
+<script type="text/javascript" src="js/module-myProjects.js"></script>
+<script type="text/javascript" src="js/module-cart.js"></script>
+
+</head>
+
+<body ng-app="app">
+
+	<div ng-controller="loginController" ng-init="init()">
+		<!-- Navigation -->
+		<nav class=" navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#/">Life Alive</a>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse"
+					id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li><a href="#categoryList">View Projects</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<ul class="nav navbar-nav">
+							<li ng-show="userData.role =='admin' || userData.role =='user'"><a
+								href="" target="_blank">Hi {{userData.firstName}}</a></li>
+							<li ng-hide="userData.role =='admin' || userData.role =='user'"><a
+								href="#login">Login</a></li>
+							<li ng-show="userData.role =='user'"><a href="#Cart">Cart</a></li>
+							<li ng-show="userData.role =='admin' || userData.role =='user'"><a
+								ng-click="logout()">LogOut</a></li>
+						</ul>
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container -->
+		</nav>
+	</div>
+
+	<!-- NG-VIEW -->
+	<div ng-view></div>
+
+	<!-- Footer -->
+	<footer>
+		<div class="row">
+			<div class="col-lg-12">
+				<p>Copyright &copy; Your Website 2014</p>
+			</div>
+		</div>
+	</footer>
+
+	</div>
+	<!-- /.container -->
+
+</body>
+
+</html>

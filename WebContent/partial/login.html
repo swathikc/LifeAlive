@@ -1,0 +1,16 @@
+<div class="container partial-container" ng-controller="loginController" ng-init="init()">
+	<div class="login-page">
+		<div class="form">
+			<form class="login-form" target="_blank">
+				<h3>SIGN IN</h3>
+				<input type="text" placeholder="username" ng-model="username"/> 
+				<input type="password" placeholder="password" ng-model="password"/>
+				<button type="button" class="btn btn-primary" ng-click="validateLogin()">login</button>
+				<p class="message">
+					Not registered? <a href="#register">Create an account</a>
+				</p>
+			</form>
+			<h5 style="color:red"><center>{{errorMessage}}</center></h5>
+		</div>
+	</div>
+</div>	

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 23 Apr, 2017 2:44:42 AM by Hibernate Tools 5.2.1.Final -->
+<hibernate-mapping>
+    <class name="neu.edu.entity.Projects" table="projects" catalog="life_alive_db" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="categories" class="neu.edu.entity.Categories" fetch="select">
+            <column name="categoryId" />
+        </many-to-one>
+        <many-to-one name="userAccount" class="neu.edu.entity.UserAccount" fetch="select">
+            <column name="creatorId" />
+        </many-to-one>
+        <property name="createdOn" type="string">
+            <column name="createdOn" length="45" />
+        </property>
+        <property name="projectName" type="string">
+            <column name="projectName" length="45" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="1900" />
+        </property>
+        <property name="amontRequired" type="string">
+            <column name="amontRequired" length="45" />
+        </property>
+        <property name="amountRecieved" type="string">
+            <column name="amountRecieved" length="45" />
+        </property>
+        <property name="deadline" type="string">
+            <column name="deadline" length="45" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="45" />
+        </property>
+        <property name="donationCount" type="java.lang.Integer">
+            <column name="donationCount" />
+        </property>
+        <set name="donations" table="donation" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="projectId" />
+            </key>
+            <one-to-many class="neu.edu.entity.Donation" />
+        </set>
+        <set name="carts" table="cart" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="projectId" />
+            </key>
+            <one-to-many class="neu.edu.entity.Cart" />
+        </set>
+    </class>
+</hibernate-mapping>

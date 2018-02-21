@@ -1,0 +1,80 @@
+<div class="container partial-container" ng-controller="registerController">
+	<form class="form-horizontal" name="myForm" novalidate>
+		<h3><center>Register</center></h3></br></br>
+		<div class="form-group">
+			<label for="firstName" class="control-label col-xs-2">First Name*</label>
+			<div class="col-xs-10 col-mg-4 col-lg-4">
+				<input type="text" class="form-control" name="firstName" ng-model="firstName" placeholder="First Name" required>
+				  <span style="color:red" ng-show="myForm.firstName.$dirty && myForm.firstName.$invalid">
+  				  <span ng-show="myForm.firstName.$error.required">First Name is required.</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="lastName" class="control-label col-xs-2">Last Name*</label>
+			<div class="col-xs-10 col-mg-4 col-lg-4">
+				<input type="text" class="form-control" name="lastName" ng-model="lastName" placeholder="Last Name" required>
+				<span style="color:red" ng-show="myForm.lastName.$dirty && myForm.lastName.$invalid">
+  				  <span ng-show="myForm.lastName.$error.required">Last Name is required.</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="username" class="control-label col-xs-2">UserName*</label>
+			<div class="col-xs-10 col-mg-4 col-lg-4">
+				<input type="text" class="form-control" name="username" ng-model="username" placeholder="Username" required>
+				<span style="color:red" ng-show="myForm.username.$dirty && myForm.username.$invalid">
+  				  <span ng-show="myForm.username.$error.required">Username is required.</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="password" class="control-label col-xs-2">Password*</label>
+			<div class="col-xs-10 col-mg-4 col-lg-4">
+				<input type="password" class="form-control" name="password" ng-model="password" placeholder="Password" required>
+				<span style="color:red" ng-show="myForm.password.$dirty && myForm.password.$invalid">
+  				  <span ng-show="myForm.password.$error.required">Password is required.</span>
+			</div>
+		</div>
+		<div class="form-group">
+		<label for="country" class="control-label col-xs-2">Country*</label>
+			<div class="col-xs-10 col-mg-4 col-lg-4">
+				<input type="text" class="form-control" name="country" ng-model="country" placeholder="Country" required>
+				<span style="color:red" ng-show="myForm.country.$dirty && myForm.country.$invalid">
+  				  <span ng-show="myForm.country.$error.required">Country is required.</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="dob" class="control-label col-xs-2">DOB*</label>
+			<div class="col-xs-10 col-mg-4 col-lg-4">
+				<input type="date" class="form-control" name="dob" ng-model="dob" placeholder="DOB" required>
+				<span style="color:red" ng-show="myForm.dob.$dirty && myForm.dob.$invalid">
+  				  <span ng-show="myForm.dob.$error.required">Date of birth is required.</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="email" class="control-label col-xs-2">Email ID*</label>
+			<div class="col-xs-10 col-mg-4 col-lg-4">
+				<input type="email" class="form-control" name="email" ng-model="email" placeholder="abcd@xyz.com" required>
+				<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+  				  <span ng-show="myForm.email.$error.required">Email ID is required.</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="phone" class="control-label col-xs-2">Phone No*</label>
+			<div class="col-xs-10 col-mg-4 col-lg-4">
+				<input type="text" class="form-control" name="phone" oninvalid="setCustomValidity('Please enter 10 digit number')"
+    			onchange="try{setCustomValidity('')}catch(e){}" pattern="[0-9]{10}" ng-model="phone" placeholder="Phone No" required>
+				<span style="color:red" ng-show="myForm.phone.$dirty && myForm.phone.$invalid">
+  				  <span ng-show="myForm.phone.$error.required">Phone No is required.</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-xs-offset-2 col-xs-10 col-mg-4 col-lg-4">
+				<button type="submit" id="submitReg" class="btn btn-primary" ng-disabled="myForm.firstName.$invalid || 
+				myForm.lastName.$invalid || myForm.username.$invalid || myForm.password.$invalid ||  
+				myForm.country.$invalid || myForm.dob.$invalid || myForm.email.$invalid || myForm.phone.$invalid" ng-click="registerUser()">Submit</button>
+				<h6>All fields with * are mandatory</h6>
+			</div>
+		</div>
+	</form>
+	
+	<center><h5 style="color:red">{{error}}</h5></center>
+</div>

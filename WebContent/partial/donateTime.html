@@ -1,0 +1,35 @@
+<div class="container" ng-controller="donateTimeController">
+	
+	<form class="form-horizontal" name="timeForm">
+		<br/><br/><br/>
+		<h3><center>Donate Time</center></h3>
+		</br></br>
+		<div row="row">
+		<div class="form-group">
+			<label for="name" class="control-label col-xs-2">Time period*</label>
+			<div class="col-xs-10 col-mg-4 col-lg-4">
+				<select name="time" ng-model="time">
+				<option value="1">1 Month</option>
+				<option value="2">2 Month</option>
+				<option value="3">3 Month</option>
+				<option value="4">4 Month</option>
+				<option value="5">5 Month</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="comment" class="control-label col-xs-2">Comment</label>
+			<div class="col-xs-10 col-mg-4 col-lg-4">
+				<textarea type="text" class="form-control" rows="8" ng-model="comment" placeholder="Comment"></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-xs-offset-2 col-xs-10 col-mg-4 col-lg-4">
+				<button type="submit" class="btn btn-primary" ng-click="postTimeDetails()">Submit</button>
+			</div>
+		</div>
+		</div>
+		<h3 class="text-success" ng-show="timeForm.time.$dirty"><center>You are about to donate {{time}} month's cost, equivalent to {{time*100 | currency}}</center></h3>
+		
+	</form>
+</div>

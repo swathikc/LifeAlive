@@ -1,0 +1,100 @@
+<div class="container" ng-controller="cartController" ng-init="getCart()">
+<br/><br/><br/><br/>
+<ol class="breadcrumb">
+		<li class="active"><a href="#categoryList">All Categories</a></li>
+		<li><a href="#projectList">All Projects</a></li>
+		<li ng-show="userData.role =='user'"><a href="#addProject">Create a project</a></li>
+		<li ng-show="userData.role =='user'"><a href="#donations">View my donations</a></li>
+		<li ng-show="userData.role =='user'"><a href="#myProjects">My Projects</a></li>
+		<li ng-show="userData.role =='admin'"><a href="#reports">View Reports</a></li>
+</ol>
+<h2><center>Cart</center></h2><br/><br/>
+<table class="table">
+    <thead>
+      <tr>
+        <th>Project Name</th>
+		<th>Type</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <p>{{cartItems}}</p>
+    <tbody ng-repeat="cart in cartList">
+    	
+	      <tr>
+	        <td>{{cart.projectsModel.projectName}}</td>
+	        <td>{{cart.projectsModel.categoriesModel.categoryName}}</td>
+	        <td>{{cart.amount}}</td>
+		  </tr>
+		  
+    </tbody>
+  </table>
+      <div class="pull-right">
+    	<p><b>Total : {{totalAmount}}</b></p>
+    </div>
+    <div class="row" ng-hide="cartList == null">
+		<div class="col-xs-10 col-mg-4 col-lg-2">
+			<button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary">Check Out</button>
+		</div>
+		<div class="col-xs-10 col-mg-4 col-lg-2">
+			<button type="button" class="btn btn-primary" ng-click="clearCart()">Clear Cart</button>
+		</div>
+	</div>
+			<!-- Modal -->
+			  <div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog">
+				
+				  <!-- Modal content-->
+				   <div class="modal-content">
+					<div class="modal-header">
+					  <button type="button" class="close" data-dismiss="modal">&times;</button>
+					  <h4 class="modal-title">Card Details</h4>
+					</div>
+					<div class="modal-body" id="modal_body" style="min-height: 300px;">
+					  <form class="form-horizontal" validate>
+						<h3><center>Card Details</center></h3>
+						</br></br>
+						<div class="form-group">
+							<label for="cardType" class="control-label col-xs-2">Card Type*</label>
+							<div class="col-xs-10 col-mg-4 col-lg-4">
+								<input type="radio" ng-model="cardType" value="visa" ng-checked="true"> Visa
+								<input type="radio" ng-model="cardType" value="master card"> Master Card
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="name" class="control-label col-xs-2">Name on Card*</label>
+							<div class="col-xs-10 col-mg-4 col-lg-4">
+								<input type="text" class="form-control" ng-model="name" placeholder="Name" ng-required="required">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="cardNumber" class="control-label col-xs-2">Card Number*</label>
+							<div class="col-xs-10 col-mg-4 col-lg-4">
+								<input type="text" pattern="[0-9]{13,16}" oninvalid="setCustomValidity('Please enter 16 digits number')" class="form-control" ng-model="cardNumber" placeholder="XXXX XXXX XXXX XXXX" ng-required="required">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="cvc" class="control-label col-xs-2">CVC*</label>
+							<div class="col-xs-10 col-mg-4 col-lg-4">
+								<input type="password" pattern="[0-9]{3}" oninvalid="setCustomValidity('Please enter 3 digits number')" class="form-control" ng-model="cvc" placeholder="XXX" ng-required="required">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="exp" class="control-label col-xs-2">Expiry*</label>
+							<div class="col-xs-10 col-mg-4 col-lg-4">
+								<input type="month" class="form-control" ng-model="exp" ng-required="required">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-xs-offset-2 col-xs-10 col-mg-4 col-lg-4">
+								<button type="submit" class="btn btn-primary" ng-click="postCardDetails()">Submit</button>
+							</div>
+						</div>
+					</form>
+					</div>
+				  </div>
+				  
+				</div>
+			  </div>
+			  <!-- modal end -->
+  <h3>{{error}}</h3>
+</div>

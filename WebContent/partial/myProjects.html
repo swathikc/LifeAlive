@@ -1,0 +1,44 @@
+<!-- Page Content -->
+<div class="container partial-container" ng-controller="myProjectsController" ng-init="getMyProjects()">
+	<ol class="breadcrumb">
+		<li class="active"><a href="#categoryList">All Categories</a></li>
+		<li><a href="#projectList">All Projects</a></li>
+		<li ng-show="userData.role =='user'"><a href="#addProject">Create
+				a project</a></li>
+		<li ng-show="userData.role =='user'"><a href="#donations">View
+				my donations</a></li>
+		<li ng-show="userData.role =='user'"><a href="#myProjects">My Projects</a></li>
+		<li ng-show="userData.role =='admin'"><a href="#reports">View
+				Reports</a></li>
+	</ol>
+		<h2><center>My Projects</center></h2><br/><br/>
+
+	<div class="row">
+		<!-- Blog Entries Column -->
+		<div class="center-block" ng-repeat="project in projects | filter : {creatorId: userId}:true">
+			<h1>{{project.projectName}}</h1>
+			<h4>
+				<em>by {{project.creatorName}}</em>
+			</h4>
+			<p><i class="fa fa-clock-o"></i> Posted on {{project.createdOn | date}}</p>
+            <p><i class="fa fa-clock-o"></i> Donate by {{project.deadline | date}}</p>
+            <p><i class="fa fa-clock-o"></i> Amount needed <b>{{project.amountRequired | currency}}</b></p>
+            <p><i class="fa fa-clock-o"></i> Amount received <b>{{project.amountRecieved | currency}}</b></p>
+			<img class="img-responsive img-hover"
+				src="http://placehold.it/900x300" alt="">
+			<p>{{project.description}}</p>
+			<a class="btn btn-primary" href="#project/{{project.id}}" ng-disabled = "project.status == 'invalid'">Read More <i class="fa fa-angle-right"></i></a>
+			<a class="btn btn-danger" href="#" ng-show="userData.role =='admin'">Delete<i class="fa fa-angle-right"></i></a>
+			<a class="btn btn-success" ng-show="userData.role == 'admin' && project.status == 'pending'" href="#">Approve<i class="fa fa-angle-right"></i></a>
+
+			<hr>
+
+		</div>
+		</div>
+		
+	<h2><center>{{error}}</center></h2>
+	</div>
+	<!-- /.row -->
+
+</div>
+<!-- /.container -->

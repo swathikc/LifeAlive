@@ -1,0 +1,154 @@
+<!-- Page Content -->
+    <div class="container partial-container " ng-controller="projectController" ng-init="getProjectAndComments()">
+	<ol class="breadcrumb">
+		<li class="active"><a href="#categoryList">All Categories</a></li>
+		<li><a href="#projectList">All Projects</a></li>
+		<li ng-show="userData.role =='user'"><a href="#addProject">Create a project</a></li>
+		<li ng-show="userData.role =='user'"><a href="#donations">View my donations</a></li>
+		<li ng-show="userData.role =='user'"><a href="#myProjects">My Projects</a></li>
+		<li ng-show="userData.role =='admin'"><a href="#reports">View Reports</a></li>
+	</ol>
+        <div class="row">
+            <div class="col-lg-10">
+                <h1 class="page-header">{{project.projectName}}
+                    <small>by {{project.creatorName}}</small>
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Content Row -->
+        <div class="row">
+
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-10">
+            
+                <!-- Date/Time -->
+                <p><i class="fa fa-clock-o"></i> Posted on {{project.createdOn | date}}</p>
+                <p><i class="fa fa-clock-o"></i> Donate by {{project.deadline | date}}</p>
+                <p><i class="fa fa-clock-o"></i> Amount needed <b>{{project.amountRequired | currency}}</b></p>
+                <p><i class="fa fa-clock-o"></i> Amount received <b>{{project.amountRecieved | currency}}</b></p>
+
+                <!-- Preview Image -->
+                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+
+                <hr>
+
+                <!-- Post Content -->
+                <p class="lead">{{project.description}}</p>
+
+                <hr>
+                <div style="margin-bottom: 10px;">
+                	<a class="btn btn-primary" ng-show="userData.role != 'admin'" ng-disabled = "project.status == 'invalid'" ng-click="checkUser()">Donate Money!</a>
+                	<a class="btn btn-primary" ng-show="userData.role != 'admin'" ng-disabled = "project.status == 'invalid'" ng-click="checkUserToDonateTime()">Donate for Time Period!</a>
+                	<a class="btn btn-primary" ng-show="userData.role == 'user'" ng-disabled = "project.status == 'invalid'" data-toggle="modal" data-target="#myModal">Add to cart</a>
+                	<a class="btn btn-danger" ng-show="userData.role == 'admin'" ng-disabled = "project.status == 'invalid'" ng-click="deleteProject(project)">Delete</a>
+                	<a class="btn btn-danger" ng-show="userData.role == 'admin'" ng-disabled = "project.status == 'invalid'" ng-click="forcedDeleteProject(project)">Forced Delete</a>
+                	<a class="btn btn-success" ng-show="userData.role == 'admin' && project.status == 'pending'" ng-click="approveProject(project)">Approve</a>
+                	<a class="btn btn-primary" ng-show="userData.role == 'admin'" data-toggle="collapse" data-target="#payment">Payment details</a>
+                </div>
+                
+			<!-- Modal -->
+			  <div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog">
+				
+				  <!-- Modal content-->
+				   <div class="modal-content">
+					<div class="modal-header">
+					  <button type="button" class="close" data-dismiss="modal">&times;</button>
+					  <h4 class="modal-title">Add to Cart</h4>
+					</div>
+					<div class="modal-body" id="modal_body" style="min-height: 300px;">
+					  <form class="form-horizontal" validate>
+						<h3><center>Enter amount or time</center></h3>
+						</br></br>
+						<div class="form-group">
+							<label for="amount" class="control-label col-xs-2">Amount*</label>
+							<div class="col-xs-10 col-mg-4 col-lg-4">
+								<input type="number" class="form-control" min="1" max="100000" ng-model="amount" placeholder="Amount in $">
+							</div>
+						</div>
+						<p><center>OR</center></p>
+						<div class="form-group">
+							<label for="name" class="control-label col-xs-2">Time period*</label>
+							<div class="col-xs-10 col-mg-4 col-lg-4">
+								<select name="time" ng-model="time">
+								<option value="1">1 Month</option>
+								<option value="2">2 Month</option>
+								<option value="3">3 Month</option>
+								<option value="4">4 Month</option>
+								<option value="5">5 Month</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="comment" class="control-label col-xs-2">Comment</label>
+							<div class="col-xs-10 col-mg-4 col-lg-4">
+								<textarea type="text" class="form-control" rows="8" ng-model="comment" placeholder="Comment"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-xs-offset-2 col-xs-10 col-mg-4 col-lg-4">
+								<button type="submit" class="btn btn-primary" ng-click="addToCart(project)">Add</button>
+							</div>
+						</div>
+					</form>
+					</div>
+				  </div>
+				  
+				</div>
+			  </div>
+			  <!-- modal end -->
+				<div id="payment" class="collapse">
+					<table class="table">
+					    <thead>
+					      <tr>
+					        <th>Donar Name</th>
+							<th>Amount</th>
+					        <th>Date of Payment</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					      <tr ng-repeat="donation in donations">
+					        <td>{{donation.userAccountModel.firstName}} {{donation.userAccountModel.lastName}}</td>
+					        <td>{{donation.amount}}</td>
+							<td>{{donation.dateOfPayment}}</td>
+					      </tr>
+					    </tbody>
+					  </table>
+				</div>
+
+                <!-- Posted Comments -->
+
+                <!-- Comment -->
+                <div class="media" ng-repeat="donation in donations">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" src="http://placehold.it/64x64" alt="">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{donation.userAccountModel.firstName}} {{donation.userAccountModel.lastName}}
+                            <small>{{donation.dateOfPayment.substring(0,10)}}</small>
+                        </h4>
+                        {{donation.comment}}
+                    </div>
+                </div>
+
+            </div>
+			
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+        <div class="alert alert-success" ng-show="showSuccessAlert">
+		  <button type="button" class="close" data-ng-click="switchBool('showSuccessAlert')" >×</button>
+		  	<h4>{{message}}</h4>
+		</div>
+		<div class="alert alert-warning" ng-show="showWarningAlert">
+		  <button type="button" class="close" data-ng-click="switchBool('showWarningAlert')" >×</button>
+		  	<h4><strong>Warning: </strong>{{errorMessage}}</h4>
+		</div>
+		
+
+    </div>
+    <!-- /.container -->
